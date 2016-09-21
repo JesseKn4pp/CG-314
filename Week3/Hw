@@ -1,0 +1,30 @@
+float x;
+float y;
+float easing = 0.01;
+Boolean button = false;
+
+void setup() {
+  size(640, 480);
+}
+
+void draw() {
+  fill(255, 0, 0);
+  rect(10, 10, 60, 60); //this is the button
+
+  if (mousePressed) {
+    if (mouseX > 10 && mouseX< 70 &&mouseY >10 && mouseY < 70) {
+      fill(0, 255, 0);
+      rect(10, 10, 60, 60);
+      button = true;  // this is what happens if button is pressed
+    }
+  }
+
+
+
+  if (mousePressed) {
+    if(button) {
+     
+    line(mouseX, mouseY, pmouseX, pmouseY);  // this is what gets drawn
+  }
+}
+}
