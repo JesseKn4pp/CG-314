@@ -1,6 +1,3 @@
-float x;
-float y;
-float easing = 0.01;
 Boolean button = false;
 
 void setup() {
