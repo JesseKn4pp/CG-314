@@ -1,0 +1,41 @@
+float x;
+float y;
+float easing = 0.01;
+Boolean button = false;
+Boolean buttonA = false;
+PImage CHelmet;
+
+void setup() {
+  size(640, 480);
+  CHelmet = loadImage("CHelmet.jpg");
+}
+
+void draw() {
+  fill(255, 0, 0);
+  rect(10, 10, 60, 60); //this is the button
+
+  fill(255, 0, 0);
+  rect(10, 80, 60, 60); //this is another button
+
+  if (mousePressed && mouseX > 10 && mouseX< 70 &&mouseY >10 && mouseY < 70) {
+    fill(0, 255, 0);
+    rect(10, 10, 60, 60);
+    button = true;  // this is what happens if button is pressed
+    buttonA= false;
+  } else if (mousePressed && mouseX > 10 && mouseX < 70 && mouseY > 80 && mouseY < 140) {
+    fill(0, 255, 0);
+    rect(10, 80, 60, 60);
+    buttonA = true;  // this is what happens if button is pressed
+    button = false;
+  }
+
+
+  if (mousePressed && button == true) {
+
+    line(mouseX, mouseY, pmouseX, pmouseY);  // this is what gets drawn
+  } else if (mousePressed && buttonA == true) {
+    //if (buttonA) {
+
+    image(CHelmet, 50, 100, 200, 300); // this is the picture
+  }
+}
