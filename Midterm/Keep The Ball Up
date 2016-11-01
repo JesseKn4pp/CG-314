@@ -1,0 +1,129 @@
+float x;
+float y;
+
+float diameter = 20;
+float radius = diameter/2;
+float xDirection = 5;
+float yDirection = 5;
+ 
+float paddleH = 20;
+float paddleW = 80;
+
+//scoreboard
+int score;
+
+//ball tail
+int amount = 100;
+float [] a = new float [amount];
+float [] b = new float [amount];
+
+
+//stars{
+int stars = 2000;
+float [] s = new float [stars];
+float [] t = new float [stars];
+float [] shade = new float [stars];
+float [] round = new float [stars];
+//}
+
+//Saucer UFO;
+
+//gameover
+boolean gameOver;
+
+
+void setup() {
+  size(800, 600);
+  x = radius;
+  y = height/2;
+  //NOTE: The paddle was supposed to be the the Saucer but it refuses to resize correctly
+  //UFO = new Saucer (width/2, height/2, 160, color(100, 222, 255));
+  score = 0;
+  
+  //stars{
+  s = new float [stars]; 
+
+  for (int i = 0; i<s.length; i++) {
+    s[i] = random (1, width); 
+    t[i] = random (1, height); 
+    shade [i] = random (100, 200); 
+    round [i] = random (1, 10);
+    //}
+  }
+  
+}
+
+void draw () {
+  background(0);
+  noStroke();
+  fill(255);
+  rectMode(CENTER);
+  
+  //stars{
+    for (int i=0; i< s.length; i++) {
+    fill(shade[i]); 
+    ellipse (s[i], t[i], round[i], round[i]); 
+    t[i] += 0.1; 
+    if (t[i] > height) {
+      t[i] = 0;
+    }
+  }
+    
+    //}
+
+  //ball
+  {
+    fill(random(255), random(255), random(255));
+  ellipse(x, y, diameter, diameter);
+  
+  }
+  
+  //paddle
+    //UFO.display ();
+    {
+      fill(255);
+  rect(mouseX, 550,  paddleW, paddleH);
+    }
+
+  //this controlls the way the Ball bounces
+  x = x + xDirection;
+  y = y + yDirection;
+
+//Scoreboard
+text("score : "+score, 650,600 );
+
+  //Paddle hit box
+  if (y < 550) { 
+    if (x > mouseX - paddleW && x < mouseX + paddleW && y > 550 - paddleH && y < 550 + paddleH ) {
+      yDirection = -yDirection;
+      score++;
+      
+      }
+      
+  }
+
+  //Walls
+  if (x > width - radius || x < radius) {
+    xDirection = -xDirection;
+  }
+  if (y > height - radius || y < radius) {
+    yDirection = -yDirection;
+  }
+  //controls Gameover{
+  if (score >=10) {
+    textSize(30);
+    fill(random(255), random(255), random(255));
+    text("You WIN! Click to restart", 125, 100);
+    noLoop() ;
+    gameOver=true;
+  }
+
+}
+
+ void mousePressed() {
+    if (gameOver == true) {
+      score = 0;
+      gameOver = false;
+      loop();
+    }
+  //}
