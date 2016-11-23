@@ -1,0 +1,45 @@
+import processing.video.*;
+Capture video;
+
+
+
+void setup () {
+  size (640, 480);
+  video = new Capture(this, 640, 480);
+  video.start();
+}
+
+void draw() {
+  background(0);
+  loadPixels ();
+
+  video.loadPixels ();
+  for (int x = 0; x<width; x++) {
+    for (int y = 0; y<height; y++) {
+      int theIndex = x + y * width;
+      float r = (red(video.pixels[theIndex]));
+      float g = (green(video.pixels[theIndex]));
+      float b = (blue(video.pixels[theIndex]));
+      pixels[theIndex] = color(r, g, b);
+      if (mousePressed) {
+        float r1 = random((red(video.pixels[theIndex])));
+        float g1 = random((green(video.pixels[theIndex])));
+        float b1 = random((blue(video.pixels[theIndex])));
+        pixels[theIndex] = color(r1, g1, b1);
+      }
+      if (keyPressed) {
+        if (key == 'z') {
+          float r2 = 255-(red(video.pixels[theIndex]));
+          float g2 = 255-(green(video.pixels[theIndex]));
+          float b2 = 255-(blue(video.pixels[theIndex]));
+          pixels[theIndex] = color(r2, g2, b2);
+        }
+      }
+    }
+  }
+  updatePixels();
+  video.updatePixels();
+}
+void captureEvent(Capture video) {
+  video.read();
+}
