@@ -1,0 +1,36 @@
+float x, y, z;
+float rotation = PI/48;
+float direction = 5;
+
+void setup() {
+  size(800, 600, P3D);
+  x = width/2;
+  y = height/2;
+  z = 0;
+}
+
+void draw() {
+  lights();
+  fill(255, 255,0);
+  noStroke();
+  background(0);
+  translate(x, y, z);
+  rotateX(rotation);
+  rotateZ(rotation);
+  
+  sphere(100);
+  strokeWeight(3);
+  stroke(255, 30, 0);
+  sphere(110);
+  rotation+= PI/50;
+  strokeWeight(4);
+  stroke(255, 100, 0);
+  sphere(115);
+  rotation+= PI/45;
+  strokeWeight(4);
+  stroke(255, 255, 0);
+  sphere(120);
+  rotation+= PI/30;
+
+
+}
