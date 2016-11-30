@@ -1,3 +1,4 @@
+// Updated Star
 float x, y, z;
 float rotation = PI/48;
 float direction = 5;
